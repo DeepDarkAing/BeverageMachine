@@ -1,5 +1,6 @@
 package com.beveragemachine.manage.domain;
 
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.beveragemachine.common.annotation.Excel;
@@ -11,6 +12,7 @@ import com.beveragemachine.common.core.domain.BaseEntity;
  * @author aing
  * @date 2025-10-18
  */
+@Data
 public class Node extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -38,80 +40,4 @@ public class Node extends BaseEntity
     @Excel(name = "合作商")
     private Long partnerId;
 
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
-
-    public Long getId() 
-    {
-        return id;
-    }
-
-    public void setNodeName(String nodeName) 
-    {
-        this.nodeName = nodeName;
-    }
-
-    public String getNodeName() 
-    {
-        return nodeName;
-    }
-
-    public void setDetailedAddress(String detailedAddress) 
-    {
-        this.detailedAddress = detailedAddress;
-    }
-
-    public String getDetailedAddress() 
-    {
-        return detailedAddress;
-    }
-
-    public void setBusinessType(Long businessType) 
-    {
-        this.businessType = businessType;
-    }
-
-    public Long getBusinessType() 
-    {
-        return businessType;
-    }
-
-    public void setRegionId(Long regionId) 
-    {
-        this.regionId = regionId;
-    }
-
-    public Long getRegionId() 
-    {
-        return regionId;
-    }
-
-    public void setPartnerId(Long partnerId) 
-    {
-        this.partnerId = partnerId;
-    }
-
-    public Long getPartnerId() 
-    {
-        return partnerId;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("nodeName", getNodeName())
-            .append("detailedAddress", getDetailedAddress())
-            .append("businessType", getBusinessType())
-            .append("regionId", getRegionId())
-            .append("partnerId", getPartnerId())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .append("createBy", getCreateBy())
-            .append("updateBy", getUpdateBy())
-            .append("remark", getRemark())
-            .toString();
-    }
 }

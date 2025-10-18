@@ -1,5 +1,6 @@
 package com.beveragemachine.manage.domain;
 
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.beveragemachine.common.annotation.Excel;
@@ -11,6 +12,7 @@ import com.beveragemachine.common.core.domain.BaseEntity;
  * @author aing
  * @date 2025-10-18
  */
+@Data
 public class Partner extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -41,91 +43,4 @@ public class Partner extends BaseEntity
     /** 密码 */
     private String password;
 
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
-
-    public Long getId() 
-    {
-        return id;
-    }
-
-    public void setPartnerName(String partnerName) 
-    {
-        this.partnerName = partnerName;
-    }
-
-    public String getPartnerName() 
-    {
-        return partnerName;
-    }
-
-    public void setContactPerson(String contactPerson) 
-    {
-        this.contactPerson = contactPerson;
-    }
-
-    public String getContactPerson() 
-    {
-        return contactPerson;
-    }
-
-    public void setContactPhone(String contactPhone) 
-    {
-        this.contactPhone = contactPhone;
-    }
-
-    public String getContactPhone() 
-    {
-        return contactPhone;
-    }
-
-    public void setSharingRatio(Long sharingRatio) 
-    {
-        this.sharingRatio = sharingRatio;
-    }
-
-    public Long getSharingRatio() 
-    {
-        return sharingRatio;
-    }
-
-    public void setAccount(String account) 
-    {
-        this.account = account;
-    }
-
-    public String getAccount() 
-    {
-        return account;
-    }
-
-    public void setPassword(String password) 
-    {
-        this.password = password;
-    }
-
-    public String getPassword() 
-    {
-        return password;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("partnerName", getPartnerName())
-            .append("contactPerson", getContactPerson())
-            .append("contactPhone", getContactPhone())
-            .append("sharingRatio", getSharingRatio())
-            .append("account", getAccount())
-            .append("password", getPassword())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .append("createBy", getCreateBy())
-            .append("updateBy", getUpdateBy())
-            .append("remark", getRemark())
-            .toString();
-    }
 }
