@@ -34,17 +34,4 @@ public class Region extends BaseEntity {
     @Excel(name = "点位数")
     private String nodeCount;
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("regionName", getRegionName())
-                .append("nodeCount", getNodeCount())
-                .append("createTime", getCreateTime())
-                .append("updateTime", getUpdateTime())
-                .append("createBy", getCreateBy())
-                .append("updateBy", getUpdateBy())
-                .append("remark", getRemark())
-                .toString();
-    }
 }
