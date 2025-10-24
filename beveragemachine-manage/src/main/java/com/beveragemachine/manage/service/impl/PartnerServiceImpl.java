@@ -2,6 +2,8 @@ package com.beveragemachine.manage.service.impl;
 
 import java.util.List;
 import com.beveragemachine.common.utils.DateUtils;
+import com.beveragemachine.common.utils.SecurityUtils;
+import com.beveragemachine.manage.domain.VO.PartnerVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.beveragemachine.manage.mapper.PartnerMapper;
@@ -39,7 +41,7 @@ public class PartnerServiceImpl implements IPartnerService
      * @return 合作商管理
      */
     @Override
-    public List<Partner> selectPartnerList(Partner partner)
+    public List<PartnerVO> selectPartnerList(Partner partner)
     {
         return partnerMapper.selectPartnerList(partner);
     }
@@ -53,6 +55,8 @@ public class PartnerServiceImpl implements IPartnerService
     @Override
     public int insertPartner(Partner partner)
     {
+        //使用springSecurity工具类，对前端传入的密码进行加密
+        partner.setPassword(SecurityUtils.encryptPassword(partner.getPassword()));
         partner.setCreateTime(DateUtils.getNowDate());
         return partnerMapper.insertPartner(partner);
     }

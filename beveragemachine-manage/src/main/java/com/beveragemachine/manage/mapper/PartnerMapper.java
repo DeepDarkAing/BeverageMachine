@@ -2,6 +2,7 @@ package com.beveragemachine.manage.mapper;
 
 import java.util.List;
 import com.beveragemachine.manage.domain.Partner;
+import com.beveragemachine.manage.domain.VO.PartnerVO;
 
 /**
  * 合作商管理Mapper接口
@@ -25,7 +26,7 @@ public interface PartnerMapper
      * @param partner 合作商管理
      * @return 合作商管理集合
      */
-    public List<Partner> selectPartnerList(Partner partner);
+    public List<PartnerVO> selectPartnerList(Partner partner);
 
     /**
      * 新增合作商管理

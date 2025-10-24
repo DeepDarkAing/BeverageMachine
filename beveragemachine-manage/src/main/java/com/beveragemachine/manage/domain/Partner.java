@@ -34,7 +34,7 @@ public class Partner extends BaseEntity
 
     /** 分成比例 */
     @Excel(name = "分成比例")
-    private Long sharingRatio;
+    private Double sharingRatio;
 
     /** 账号 */
     @Excel(name = "账号")

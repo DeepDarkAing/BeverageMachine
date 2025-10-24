@@ -1,6 +1,8 @@
 package com.beveragemachine.manage.controller;
 
 import java.util.List;
+
+import com.beveragemachine.manage.domain.VO.PartnerVO;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +25,13 @@ import com.beveragemachine.common.core.page.TableDataInfo;
 
 /**
  * 合作商管理Controller
- * 
+ *
  * @author aing
  * @date 2025-10-18
  */
 @RestController
 @RequestMapping("/manage/partner")
-public class PartnerController extends BaseController
-{
+public class PartnerController extends BaseController {
     @Autowired
     private IPartnerService partnerService;
 
@@ -39,10 +40,9 @@ public class PartnerController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('manage:partner:list')")
     @GetMapping("/list")
-    public TableDataInfo list(Partner partner)
-    {
+    public TableDataInfo list(Partner partner) {
         startPage();
-        List<Partner> list = partnerService.selectPartnerList(partner);
+        List<PartnerVO> list = partnerService.selectPartnerList(partner);
         return getDataTable(list);
     }
 
@@ -52,20 +52,19 @@ public class PartnerController extends BaseController
     @PreAuthorize("@ss.hasPermi('manage:partner:export')")
     @Log(title = "合作商管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, Partner partner)
-    {
-        List<Partner> list = partnerService.selectPartnerList(partner);
-        ExcelUtil<Partner> util = new ExcelUtil<Partner>(Partner.class);
+    public void export(HttpServletResponse response, Partner partner) {
+        List<PartnerVO> list = partnerService.selectPartnerList(partner);
+        ExcelUtil<PartnerVO> util = new ExcelUtil<PartnerVO>(PartnerVO.class);
         util.exportExcel(response, list, "合作商管理数据");
     }
+
 
     /**
      * 获取合作商管理详细信息
      */
     @PreAuthorize("@ss.hasPermi('manage:partner:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(partnerService.selectPartnerById(id));
     }
 
@@ -75,8 +74,7 @@ public class PartnerController extends BaseController
     @PreAuthorize("@ss.hasPermi('manage:partner:add')")
     @Log(title = "合作商管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody Partner partner)
-    {
+    public AjaxResult add(@RequestBody Partner partner) {
         return toAjax(partnerService.insertPartner(partner));
     }
 
@@ -86,8 +84,7 @@ public class PartnerController extends BaseController
     @PreAuthorize("@ss.hasPermi('manage:partner:edit')")
     @Log(title = "合作商管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody Partner partner)
-    {
+    public AjaxResult edit(@RequestBody Partner partner) {
         return toAjax(partnerService.updatePartner(partner));
     }
 
@@ -96,9 +93,8 @@ public class PartnerController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('manage:partner:remove')")
     @Log(title = "合作商管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable Long[] ids) {
         return toAjax(partnerService.deletePartnerByIds(ids));
     }
 }
