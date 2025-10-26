@@ -2,6 +2,7 @@ package com.beveragemachine.manage.service.impl;
 
 import java.util.List;
 import com.beveragemachine.common.utils.DateUtils;
+import com.beveragemachine.manage.domain.VO.NodeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.beveragemachine.manage.mapper.NodeMapper;
@@ -39,7 +40,7 @@ public class NodeServiceImpl implements INodeService
      * @return 点位管理
      */
     @Override
-    public List<Node> selectNodeList(Node node)
+    public List<NodeVO> selectNodeList(Node node)
     {
         return nodeMapper.selectNodeList(node);
     }

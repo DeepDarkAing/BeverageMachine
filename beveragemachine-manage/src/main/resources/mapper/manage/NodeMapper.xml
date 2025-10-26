@@ -4,13 +4,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beveragemachine.manage.mapper.NodeMapper">
     
-    <resultMap type="Node" id="NodeResult">
+    <resultMap type="NodeVO" id="NodeResult">
         <result property="id"    column="id"    />
         <result property="nodeName"    column="node_name"    />
         <result property="detailedAddress"    column="detailed_address"    />
         <result property="businessType"    column="business_type"    />
         <result property="regionId"    column="region_id"    />
         <result property="partnerId"    column="partner_id"    />
+        <result property="regionName"    column="region_name"    />
+        <result property="partnerName"    column="partner_name"    />
+        <result property="vmCount"    column="vm_count"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
         <result property="createBy"    column="create_by"    />
@@ -18,11 +21,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
     </resultMap>
 
-    <sql id="selectNodeVo">
-        select id, node_name, detailed_address, business_type, region_id, partner_id, create_time, update_time, create_by, update_by, remark from tb_node
-    </sql>
+<sql id="selectNodeVo">
+    SELECT
+        n.id,
+        n.node_name,
+        n.detailed_address,
+        n.business_type,
+        n.region_id,
+        r.region_name,
+        n.partner_id,
+        p.partner_name,
+        n.create_time,
+        n.update_time,
+        n.create_by,
+        n.update_by,
+        n.remark,
+        count(vm.id) as vm_count
+    FROM tb_node n
+    LEFT JOIN tb_region r ON n.region_id = r.id
+    LEFT JOIN tb_partner p ON n.partner_id = p.id
+    LEFT JOIN tb_vending_machine vm on n.id = vm.node_id
+    GROUP BY n.id
+</sql>
+<sql id="selectNode" >
+    select *
+    from tb_node
+</sql>
 
-    <select id="selectNodeList" parameterType="Node" resultMap="NodeResult">
+    <select id="selectNodeList" parameterType="NodeVO" resultMap="NodeResult">
         <include refid="selectNodeVo"/>
         <where>  
             <if test="nodeName != null  and nodeName != ''"> and node_name like concat('%', #{nodeName}, '%')</if>
@@ -31,10 +57,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
-    <select id="selectNodeById" parameterType="Long" resultMap="NodeResult">
-        <include refid="selectNodeVo"/>
-        where id = #{id}
-    </select>
+<select id="selectNodeById" parameterType="Long" resultMap="NodeResult">
+    <include refid="selectNode"/>
+    WHERE id = #{id}
+</select>
+
 
     <insert id="insertNode" parameterType="Node" useGeneratedKeys="true" keyProperty="id">
         insert into tb_node

@@ -2,6 +2,7 @@ package com.beveragemachine.manage.service;
 
 import java.util.List;
 import com.beveragemachine.manage.domain.Node;
+import com.beveragemachine.manage.domain.VO.NodeVO;
 
 /**
  * 点位管理Service接口
@@ -25,7 +26,7 @@ public interface INodeService
      * @param node 点位管理
      * @return 点位管理集合
      */
-    public List<Node> selectNodeList(Node node);
+    public List<NodeVO> selectNodeList(Node node);
 
     /**
      * 新增点位管理
