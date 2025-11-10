@@ -1,12 +1,15 @@
 package com.beveragemachine.manage.service.impl;
 
+import java.beans.Transient;
 import java.util.List;
 import com.beveragemachine.common.utils.DateUtils;
+import com.beveragemachine.manage.mapper.EmpMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.beveragemachine.manage.mapper.RegionMapper;
 import com.beveragemachine.manage.domain.Region;
 import com.beveragemachine.manage.service.IRegionService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 区域管理Service业务层处理
@@ -19,6 +22,8 @@ public class RegionServiceImpl implements IRegionService
 {
     @Autowired
     private RegionMapper regionMapper;
+    @Autowired
+    private EmpMapper empMapper;
 
     /**
      * 查询区域管理
@@ -63,11 +68,14 @@ public class RegionServiceImpl implements IRegionService
      * @param region 区域管理
      * @return 结果
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public int updateRegion(Region region)
     {
         region.setUpdateTime(DateUtils.getNowDate());
-        return regionMapper.updateRegion(region);
+        int result =regionMapper.updateRegion(region);
+        empMapper.updateRegionNameById(region);
+        return result;
     }
 
     /**

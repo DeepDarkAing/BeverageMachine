@@ -2,6 +2,8 @@ package com.beveragemachine.manage.mapper;
 
 import java.util.List;
 import com.beveragemachine.manage.domain.Emp;
+import com.beveragemachine.manage.domain.Region;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * 员工列表Mapper接口
@@ -58,4 +60,7 @@ public interface EmpMapper
      * @return 结果
      */
     public int deleteEmpByIds(Long[] ids);
+
+    @Update("update tb_emp set region_name=#{regionName} where region_id=#{id}")
+    public int updateRegionNameById(Region  region);
 }
