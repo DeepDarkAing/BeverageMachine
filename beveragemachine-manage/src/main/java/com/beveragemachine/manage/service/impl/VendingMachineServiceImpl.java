@@ -77,11 +77,7 @@ public class VendingMachineServiceImpl implements IVendingMachineService {
             char letter = (char) ('A' + random.nextInt(26));
             innerCode += letter;
         }
-        // 生成第一位数字（0-9）
-        int firstDigit = random.nextInt(10);
-        // 生成第二位数字（0-9）
-        int secondDigit = random.nextInt(10);
-        return innerCode + "-" + firstDigit + 0 + secondDigit + 0;
+        return innerCode + "-" + random.nextInt(10) + 0 + random.nextInt(10) + 0;
     }
 
     /**
