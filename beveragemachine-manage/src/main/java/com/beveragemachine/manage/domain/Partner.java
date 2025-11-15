@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.beveragemachine.common.annotation.Excel;
 import com.beveragemachine.common.core.domain.BaseEntity;
+import org.springframework.stereotype.Component;
 
 /**
  * 合作商管理对象 tb_partner

@@ -91,4 +91,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+
+<insert id="insertChannelList">
+    insert into tb_channel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        channel_code,
+        vm_id,
+        inner_code,
+        max_capacity,
+        current_capacity,
+        <if test="list[0].lastSupplyTime != null">last_supply_time,</if>
+        <if test="list[0].createTime != null">create_time,</if>
+        <if test="list[0].updateTime != null">update_time,</if>
+    </trim>
+    values
+    <foreach item="item" index="index" collection="list" separator=",">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #{item.channelCode},
+            #{item.vmId},
+            #{item.innerCode},
+            #{item.maxCapacity},
+            #{item.currentCapacity},
+            <if test="item.lastSupplyTime != null">#{item.lastSupplyTime},</if>
+            <if test="item.createTime != null">#{item.createTime},</if>
+            <if test="item.updateTime != null">#{item.updateTime},</if>
+        </trim>
+    </foreach>
+</insert>
+
 </mapper>

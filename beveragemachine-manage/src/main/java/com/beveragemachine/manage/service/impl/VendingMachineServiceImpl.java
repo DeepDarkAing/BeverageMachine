@@ -1,11 +1,17 @@
 package com.beveragemachine.manage.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.beveragemachine.common.utils.DateUtils;
+import com.beveragemachine.manage.domain.Channel;
 import com.beveragemachine.manage.domain.Node;
+import com.beveragemachine.manage.domain.VmType;
+import com.beveragemachine.manage.mapper.ChannelMapper;
 import com.beveragemachine.manage.mapper.NodeMapper;
+import com.beveragemachine.manage.mapper.VmTypeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.beveragemachine.manage.mapper.VendingMachineMapper;
@@ -24,6 +30,10 @@ public class VendingMachineServiceImpl implements IVendingMachineService {
     private VendingMachineMapper vendingMachineMapper;
     @Autowired
     private NodeMapper nodeMapper;
+    @Autowired
+    private VmTypeMapper vmTypeMapper;
+    @Autowired
+    private ChannelMapper channelMapper;
 
     /**
      * 查询设备管理
@@ -57,15 +67,35 @@ public class VendingMachineServiceImpl implements IVendingMachineService {
     public int insertVendingMachine(VendingMachine vendingMachine) {
         // 生成内部编号
         vendingMachine.setInnerCode(generateInnerCode());
+        // 设置通道最大容量
+        vendingMachine.setChannelMaxCapacity(vmTypeMapper.selectVmTypeById(vendingMachine.getVmTypeId()).getChannelMaxCapacity());
         // 查询节点信息
         Node node = nodeMapper.selectNodeById(vendingMachine.getNodeId());
-        vendingMachine.setBusinessType(node.getBusinessType());
-        vendingMachine.setRegionId(node.getRegionId());
+        BeanUtil.copyProperties(node, vendingMachine, "id", "createTime");
         vendingMachine.setAddr(node.getDetailedAddress());
-        vendingMachine.setPartnerId(node.getPartnerId());
+
         // 设置创建时间
         vendingMachine.setCreateTime(DateUtils.getNowDate());
-        return vendingMachineMapper.insertVendingMachine(vendingMachine);
+        int result = vendingMachineMapper.insertVendingMachine(vendingMachine);// 插入数据
+
+        //新增货道
+        VmType vmType = vmTypeMapper.selectVmTypeById(vendingMachine.getVmTypeId());
+        List<Channel> channelList = new ArrayList<>();
+        for (int i = 1; i <= vmType.getVmRow(); i++) {
+            for (int j = 1; j <= vmType.getVmCol(); j++) {
+                Channel channel = Channel.builder()
+                        .channelCode(i + "-" + j)
+                        .maxCapacity(vmType.getChannelMaxCapacity())
+                        .currentCapacity(0L)
+                        .vmId(vendingMachine.getId())
+                        .innerCode(vendingMachine.getInnerCode())
+                        .build();
+                channel.setCreateTime(DateUtils.getNowDate());
+                channelList.add(channel);
+            }
+        }
+        result += channelMapper.insertChannelList(channelList);
+        return result;
     }
 
     private String generateInnerCode() {
@@ -88,6 +118,9 @@ public class VendingMachineServiceImpl implements IVendingMachineService {
      */
     @Override
     public int updateVendingMachine(VendingMachine vendingMachine) {
+        Node node = nodeMapper.selectNodeById(vendingMachine.getNodeId());
+        BeanUtil.copyProperties(node, vendingMachine, "id", "createTime");
+        vendingMachine.setAddr(node.getDetailedAddress());
         vendingMachine.setUpdateTime(DateUtils.getNowDate());
         return vendingMachineMapper.updateVendingMachine(vendingMachine);
     }

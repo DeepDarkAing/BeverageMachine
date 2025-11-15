@@ -3,6 +3,7 @@ package com.beveragemachine.manage.controller;
 import java.util.List;
 
 import com.beveragemachine.manage.domain.VO.PartnerVO;
+import com.beveragemachine.manage.service.impl.PartnerServiceImpl;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,6 @@ import com.beveragemachine.common.core.controller.BaseController;
 import com.beveragemachine.common.core.domain.AjaxResult;
 import com.beveragemachine.common.enums.BusinessType;
 import com.beveragemachine.manage.domain.Partner;
-import com.beveragemachine.manage.service.IPartnerService;
 import com.beveragemachine.common.utils.poi.ExcelUtil;
 import com.beveragemachine.common.core.page.TableDataInfo;
 
@@ -33,7 +33,7 @@ import com.beveragemachine.common.core.page.TableDataInfo;
 @RequestMapping("/manage/partner")
 public class PartnerController extends BaseController {
     @Autowired
-    private IPartnerService partnerService;
+    private PartnerServiceImpl partnerService;
 
     /**
      * 查询合作商管理列表
