@@ -3,6 +3,7 @@ package com.beveragemachine.manage.controller;
 import java.util.List;
 
 import com.beveragemachine.manage.domain.VO.NodeVO;
+import com.beveragemachine.manage.domain.VendingMachine;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,16 @@ public class NodeController extends BaseController
         List<NodeVO> list = nodeService.selectNodeList(node);
         return getDataTable(list);
     }
-
+    /**
+     * 查询点位设备列表
+     */
+    @PreAuthorize("@ss.hasPermi('manage:node:query')")
+    @GetMapping("/vm/{id}")
+    public TableDataInfo vmList(@PathVariable("id") Long id)
+    {
+        List<VendingMachine> list = nodeService.selectNodeVmList(id);
+        return getDataTable(list);
+    }
     /**
      * 导出点位管理列表
      */

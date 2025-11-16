@@ -3,6 +3,7 @@ package com.beveragemachine.manage.service;
 import java.util.List;
 import com.beveragemachine.manage.domain.Node;
 import com.beveragemachine.manage.domain.VO.NodeVO;
+import com.beveragemachine.manage.domain.VendingMachine;
 
 /**
  * 点位管理Service接口
@@ -59,4 +60,6 @@ public interface INodeService
      * @return 结果
      */
     public int deleteNodeById(Long id);
+
+    List<VendingMachine> selectNodeVmList(Long id);
 }

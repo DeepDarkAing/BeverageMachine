@@ -3,6 +3,7 @@ package com.beveragemachine.manage.service.impl;
 import java.util.List;
 import com.beveragemachine.common.utils.DateUtils;
 import com.beveragemachine.manage.domain.VO.NodeVO;
+import com.beveragemachine.manage.domain.VendingMachine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.beveragemachine.manage.mapper.NodeMapper;
@@ -93,5 +94,10 @@ public class NodeServiceImpl implements INodeService
     public int deleteNodeById(Long id)
     {
         return nodeMapper.deleteNodeById(id);
+    }
+
+    @Override
+    public List<VendingMachine> selectNodeVmList(Long id) {
+        return nodeMapper.selectNodeVmList(id);
     }
 }
