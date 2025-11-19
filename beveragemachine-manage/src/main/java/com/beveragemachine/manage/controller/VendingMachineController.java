@@ -1,31 +1,24 @@
 package com.beveragemachine.manage.controller;
 
-import java.util.List;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import com.beveragemachine.common.annotation.Log;
 import com.beveragemachine.common.core.controller.BaseController;
 import com.beveragemachine.common.core.domain.AjaxResult;
+import com.beveragemachine.common.core.page.TableDataInfo;
 import com.beveragemachine.common.enums.BusinessType;
+import com.beveragemachine.common.utils.poi.ExcelUtil;
 import com.beveragemachine.manage.domain.VendingMachine;
 import com.beveragemachine.manage.service.IVendingMachineService;
-import com.beveragemachine.common.utils.poi.ExcelUtil;
-import com.beveragemachine.common.core.page.TableDataInfo;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 设备管理Controller
  * 
  * @author aing
- * @date 2025-11-10
  */
 @RestController
 @RequestMapping("/manage/vm")
