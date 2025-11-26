@@ -7,7 +7,7 @@ ruoyi:
   # 版权年份
   copyrightYear: 2025
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
-  profile: D:/ruoyi/uploadPath
+  profile: E:/Aing/Ruoyi/uploadPath
   # 获取ip地址开关
   addressEnabled: false
   # 验证码类型 math 数字计算 char 字符验证
@@ -145,16 +145,22 @@ xss:
 
 dromara:
   x-file-storage: #文件存储配置
-    default-platform: aliyun-oss-1 #默认使用的存储平台
+    default-platform: local #默认使用本地存储
     thumbnail-suffix: ".min.jpg" #缩略图后缀，例如【.min.jpg】【.png】
-    #对应平台的配置写在这里，注意缩进要对齐
-    aliyun-oss:
-      - platform: aliyun-oss-1 # 存储平台标识
-        enable-storage: true  # 启用存储
-        access-key: LTAI5tK2Xj2BJoMWLVXEb8qF
-        secret-key: 90boHZqQ2CJ5Ci2Gqitg98fa7O8lYA
-        end-point: oss-cn-shanghai.aliyuncs.com
-        bucket-name: deepdarksky
-        domain: https://deepdarksky.oss-cn-shanghai.aliyuncs.com/ # 访问域名，注意“/”结尾，例如：https://abc.oss-cn-shanghai.aliyuncs.com/
-        base-path: beveragemachine/ # 基础路径
+    #本地存储配置
+    local:
+      - platform: local # 存储平台标识
+        enable-storage: true # 启用存储
+        base-path: E:/Aing/Ruoyi/uploadPath/ # 本地存储路径
+        domain: http://localhost:8080/profile/ # 访问域名，注意“/”结尾，本地存储需要配置可访问的地址
+    # 注释掉阿里云OSS配置
+    #aliyun-oss:
+    #  - platform: aliyun-oss-1 # 存储平台标识
+    #    enable-storage: true  # 启用存储
+    #    access-key: LTAI5tK2Xj2BJoMWLVXEb8qF
+    #    secret-key: 90boHZqQ2CJ5Ci2Gqitg98fa7O8lYA
+    #    end-point: oss-cn-shanghai.aliyuncs.com
+    #    bucket-name: deepdarksky
+    #    domain: https://deepdarksky.oss-cn-shanghai.aliyuncs.com/ # 访问域名，注意“/”结尾，例如：https://abc.oss-cn-shanghai.aliyuncs.com/
+    #    base-path: beveragemachine/ # 基础路径
 

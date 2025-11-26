@@ -1,18 +1,16 @@
 package com.beveragemachine.manage.service.impl;
 
-import java.util.List;
-
 import com.beveragemachine.common.utils.DateUtils;
-import com.beveragemachine.common.utils.file.AliyunOSSUtils;
+import com.beveragemachine.manage.domain.Emp;
+import com.beveragemachine.manage.mapper.EmpMapper;
+import com.beveragemachine.manage.service.IEmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.beveragemachine.manage.mapper.EmpMapper;
-import com.beveragemachine.manage.domain.Emp;
-import com.beveragemachine.manage.service.IEmpService;
+
+import java.util.List;
 
 /**
  * 员工列表Service业务层处理
- *
  * @author aing
  * @date 2025-10-28
  */
@@ -20,13 +18,9 @@ import com.beveragemachine.manage.service.IEmpService;
 public class EmpServiceImpl implements IEmpService {
     @Autowired
     private EmpMapper empMapper;
-    @Autowired
-    private AliyunOSSUtils aliyunOSSUtils;
-
-    /**
-     * 查询员工列表
-     *
-     * @param id 员工列表主键
+    /*
+      查询员工列表
+      @param id 员工列表主键
      * @return 员工列表
      */
     @Override
