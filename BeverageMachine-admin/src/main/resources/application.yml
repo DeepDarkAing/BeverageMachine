@@ -153,14 +153,4 @@ dromara:
         enable-storage: true # 启用存储
         base-path: E:/Aing/Ruoyi/uploadPath/ # 本地存储路径
         domain: http://localhost:8080/profile/ # 访问域名，注意“/”结尾，本地存储需要配置可访问的地址
-    # 注释掉阿里云OSS配置
-    #aliyun-oss:
-    #  - platform: aliyun-oss-1 # 存储平台标识
-    #    enable-storage: true  # 启用存储
-    #    access-key: LTAI5tK2Xj2BJoMWLVXEb8qF
-    #    secret-key: 90boHZqQ2CJ5Ci2Gqitg98fa7O8lYA
-    #    end-point: oss-cn-shanghai.aliyuncs.com
-    #    bucket-name: deepdarksky
-    #    domain: https://deepdarksky.oss-cn-shanghai.aliyuncs.com/ # 访问域名，注意“/”结尾，例如：https://abc.oss-cn-shanghai.aliyuncs.com/
-    #    base-path: beveragemachine/ # 基础路径
 
